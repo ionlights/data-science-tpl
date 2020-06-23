@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-`which conda`
-if [[ $? -ne 0 ]]; then
+if [[ ! $(which conda) ]]; then
     os=`uname`
 
     case $os in
@@ -10,8 +9,7 @@ if [[ $? -ne 0 ]]; then
     esac
 fi
 
-`which nvidia-smi`
-if [[ $? -ne 0 ]]; then
+if [[ ! $(which nvidia-smi) ]]; then
     echo "Could not find a GPU, installing the \`cpu\` environment. If you have a supported GPU, please manually install."
     mode="cpu"
 else
@@ -20,9 +18,10 @@ else
 fi
 
 project="${1:-data-science-tpl}-${mode}"
+sed -i "s|{{project}}|$project|g" envs/${mode}.yml
 conda env create -f envs/${mode}.yml
 
 conda activate ${project}
 pip install -e .
 
-conda env export > envs/${mode}.yml
+conda env export --no-builds > envs/${mode}.yml

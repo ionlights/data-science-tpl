@@ -1,0 +1,32 @@
+name: {{project}}
+channels:
+- pytorch
+- dglteam
+- conda-forge
+- anaconda
+- defaults
+dependencies:
+- python=3
+- pip
+# data analysis
+- numpy
+- scipy
+- pandas
+# graphing
+- matplotlib
+- seaborn
+- plotly
+- bokeh
+# jupyter
+- jupyter
+- jupyterlab
+- ipython
+# machine-learning
+- "pytorch>=1"
+- "tensorflow>=2"
+- scikit-learn
+- dask
+# general tools
+- "requests>=2"
+- ruamel.yaml
+- tqdm
